@@ -19,8 +19,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build job
-  build:
+  # Build and deploy job
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -33,34 +33,33 @@ jobs:
     - name: Make jemdoc executable
       run: chmod +x jemdoc
     
-    - name: Create output directory
-      run: mkdir -p www/html
+    - name: Create clean output directory
+      run: |
+        # Create a completely clean output directory
+        mkdir -p _site
+        # Add .nojekyll file at the root level to disable Jekyll completely
+        touch .nojekyll
+        touch _site/.nojekyll
     
     - name: Build jemdoc files
       run: |
         cd www
         # Copy CSS files to output directory
-        cp ../css/* html/ || true
-        # Ensure jemdoc.css is available (use the one from css directory)
-        if [ -f ../css/jemdoc.css ]; then
-          cp ../css/jemdoc.css html/
-        fi
+        cp ../css/* ../_site/ || true
         # Build all jemdoc files
         for file in *.jemdoc; do
           if [ -f "$file" ]; then
             echo "Building $file..."
-            ../jemdoc -c jemdoc.conf -o html/${file%.jemdoc}.html "$file"
+            ../jemdoc -c jemdoc.conf -o ../_site/${file%.jemdoc}.html "$file"
           fi
         done
-        # Copy only the vim syntax file from dist (skip all Python files)
+        # Copy only the vim syntax file from dist (avoid broken symlinks)
         if [ -f "dist/jemdoc.vim" ]; then
-          cp dist/jemdoc.vim html/
+          cp dist/jemdoc.vim ../_site/
         fi
-        # Create .nojekyll file to disable Jekyll processing
-        touch html/.nojekyll
         # List final contents for debugging
-        echo "Final contents of html directory:"
-        ls -la html/
+        echo "Final contents of _site directory:"
+        ls -la ../_site/
     
     - name: Setup Pages
       uses: actions/configure-pages@v4
@@ -68,18 +67,10 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        # Upload the built website
-        path: './www/html'
+        # Upload the built website from root _site directory
+        path: './_site'
 
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/main'
-    steps:
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v4 
+      uses: actions/deploy-pages@v4
+      if: github.ref == 'refs/heads/main' 
