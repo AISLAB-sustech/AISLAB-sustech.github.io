@@ -35,12 +35,13 @@ jobs:
           # Create a clean output directory
           mkdir -p _site
           
-          # Build jemdoc files into _site directory
-          cd www
           # Copy photos directory to the output directory
           if [ -d "www/photos" ]; then
             cp -r www/photos _site/
           fi
+          
+          # Build jemdoc files into _site directory
+          cd www
           # Copy CSS files to output directory
           cp ../css/* ../_site/ || true
           # Build all jemdoc files
