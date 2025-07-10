@@ -1,79 +1,50 @@
-name: Deploy jemdoc+MathJax to GitHub Pages
+name: Deploy jemdoc+MathJax to gh-pages
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  contents: write
 
 jobs:
-  # Build and deploy job
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-    
-    - name: Make jemdoc executable
-      run: chmod +x jemdoc
-    
-    - name: Create clean output directory
-      run: |
-        # Create a completely clean output directory
-        mkdir -p _site
-        # Add .nojekyll file at the root level to disable Jekyll completely
-        touch .nojekyll
-        touch _site/.nojekyll
-    
-    - name: Build jemdoc files
-      run: |
-        cd www
-        # Copy CSS files to output directory
-        cp ../css/* ../_site/ || true
-        # Build all jemdoc files
-        for file in *.jemdoc; do
-          if [ -f "$file" ]; then
-            echo "Building $file..."
-            ../jemdoc -c jemdoc.conf -o ../_site/${file%.jemdoc}.html "$file"
-          fi
-        done
-        # Copy only the vim syntax file from dist (avoid broken symlinks)
-        if [ -f "dist/jemdoc.vim" ]; then
-          cp dist/jemdoc.vim ../_site/
-        fi
-        # List final contents for debugging
-        echo "Final contents of _site directory:"
-        ls -la ../_site/
-    
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-    
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        # Upload the built website from root _site directory
-        path: './_site'
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
-      if: github.ref == 'refs/heads/main' 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Make jemdoc executable
+        run: chmod +x jemdoc
+
+      - name: Build jemdoc files
+        run: |
+          # Create a clean output directory
+          mkdir -p _site
+          
+          # Build jemdoc files into _site directory
+          cd www
+          # Copy CSS files to output directory
+          cp ../css/* ../_site/ || true
+          # Build all jemdoc files
+          for file in *.jemdoc; do
+            if [ -f "$file" ]; then
+              echo "Building $file..."
+              ../jemdoc -c jemdoc.conf -o ../_site/${file%.jemdoc}.html "$file"
+            fi
+          done
+
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com' 
