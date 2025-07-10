@@ -23,6 +23,13 @@ jobs:
       - name: Make jemdoc executable
         run: chmod +x jemdoc
 
+      - name: Remove broken symlink to prevent build errors
+        run: |
+          if [ -L "www/dist/jemdoc.css" ]; then
+            echo "Removing broken symbolic link: www/dist/jemdoc.css"
+            rm "www/dist/jemdoc.css"
+          fi
+
       - name: Build jemdoc files
         run: |
           # Create a clean output directory
