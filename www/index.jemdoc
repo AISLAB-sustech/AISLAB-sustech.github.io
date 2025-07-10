@@ -1,11 +1,20 @@
 # jemdoc: menu{MENU}{index.html}, nofooter
 = He Kong
 
-~~~
-{}{img_left}{photos/he_kong.png}{alt text}{150}{149}{}
-Associate Professor,\n [https://aim.sustech.edu.cn// School of Automation and Intelligent Manufacturing], \n[https://sustech.edu.cn/ SUSTech]\n
-E-mail: /kongh/ \[@\] sustech \[DOT\] edu \[DOT\] cn
-~~~
+<table class="imgtable"><tr>
+  <td>
+    <img src="photos/he_kong.png" alt="He Kong Photo" width="150" />
+  </td>
+  <td align="left">
+    <p>
+      Associate Professor<br>
+      <a href="https://aim.sustech.edu.cn/">School of Automation and Intelligent Manufacturing</a><br>
+      <a href="https://sustech.edu.cn/">SUSTech</a><br>
+      E-mail: kongh [at] sustech.edu.cn
+    </p>
+  </td>
+</tr></table>
+
 == About me
 Please write a short bio about yourself here. You can introduce your research interests, academic background, and any other relevant information.
 
@@ -14,7 +23,6 @@ Please write a short bio about yourself here. You can introduce your research in
 - **Master**, [Major], [University], [Year]
 - **Bachelor**, [Major], [University], [Year]
 
-~~~
 == Recent News
 - **2025,7:** Welcome our new lab students!
-- **2025,6:** Our paper about ... is accepted by *International Conference on Robotics and Automation (ICRA) 2025!*~~~
+- **2025,6:** Our paper about ... is accepted by *International Conference on Robotics and Automation (ICRA) 2025!*
