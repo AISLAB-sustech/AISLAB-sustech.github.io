@@ -41,6 +41,10 @@ jobs:
         cd www
         # Copy CSS files to output directory
         cp ../css/* html/ || true
+        # Ensure jemdoc.css is available (use the one from css directory)
+        if [ -f ../css/jemdoc.css ]; then
+          cp ../css/jemdoc.css html/
+        fi
         # Build all jemdoc files
         for file in *.jemdoc; do
           if [ -f "$file" ]; then
@@ -48,8 +52,13 @@ jobs:
             ../jemdoc -c jemdoc.conf -o html/${file%.jemdoc}.html "$file"
           fi
         done
-        # Copy any additional assets
-        cp -r dist/* html/ 2>/dev/null || true
+        # Copy only the vim syntax file from dist (skip all Python files)
+        if [ -f "dist/jemdoc.vim" ]; then
+          cp dist/jemdoc.vim html/
+        fi
+        # List final contents for debugging
+        echo "Final contents of html directory:"
+        ls -la html/
     
     - name: Setup Pages
       uses: actions/configure-pages@v4
