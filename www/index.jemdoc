@@ -1,18 +1,19 @@
 # jemdoc: menu{MENU}{index.html}, nofooter
-= He Kong
 
-.twocol-container[
-.twocol-main[
-.infoblock[
-.blockcontent[
-![He Kong Photo](photos/he_kong.jpg){img_left, width=170px}
-**Associate Professor** \n
-School of Automation and Intelligent Manufacturing \n
-Southern University of Science and Technology (SUSTech) \n
-Office: [Please Add Office Number] \n
-E-mail: _kongh_@_sustech.edu.cn_
-]
-]
+<table class="imgtable"><tr>
+  <td>
+    <img src="photos/he_kong.jpg" alt="He Kong Photo" width="170" />
+  </td>
+  <td align="left">
+    <p><b>He Kong</b><br><br>
+       Associate Professor<br>
+       School of Automation and Intelligent Manufacturing<br>
+       Southern University of Science and Technology (SUSTech)<br>
+       Office: [Please Add Office Number]<br>
+       E-mail: kongh [at] sustech.edu.cn
+    </p>
+  </td>
+</tr></table>
 
 == About me
 ...
@@ -25,10 +26,3 @@ E-mail: _kongh_@_sustech.edu.cn_
 == Recent News
 - **2025,7:** Welcome our new lab students!
 - **2025,6:** Our paper about ... is accepted by *International Conference on Robotics and Automation (ICRA) 2025!*
-
-]
-.twocol-sidebar[
-.sidemenu[
-]
-]
-]
