@@ -37,6 +37,10 @@ jobs:
           
           # Build jemdoc files into _site directory
           cd www
+          # Copy photos directory to the output directory
+          if [ -d "www/photos" ]; then
+            cp -r www/photos _site/
+          fi
           # Copy CSS files to output directory
           cp ../css/* ../_site/ || true
           # Build all jemdoc files
