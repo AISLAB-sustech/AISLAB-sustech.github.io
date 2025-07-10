@@ -1,8 +1,10 @@
 # jemdoc: menu{MENU}{lab.html}, nofooter
 = Welcome to the Active Intelligent Systems Lab (AISLAB)!
+
 ~~~
-{}{img_left}{photos/summer_2025_grads.jpg}{alt text}{}{}{}
+{}{img_left}{photos/summer_2025_grads.jpg}{alt text}{}{}
 ~~~
+
 == About Our Lab
 Our lab aims to bring intelligent to robots.
 
