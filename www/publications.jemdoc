@@ -2,18 +2,18 @@
 = Publications
 
 === 2025
-- <b>He Kong</b>, Jane Doe. \n
+- He Kong. \n
   This is the Title of Our Latest Work. \n
   *arXiv preprint arXiv:2507.12345*, July 2025. \n
   [https://arxiv.org/abs/2507.12345 [arXiv]] [https://github.com/your-repo/latest-work [Code]]
 
 === 2024
-- John Smith, <b>He Kong</b>*. \n
+- John Smith, He Kong*. \n
   Solving a Hard Problem in Computer Vision. \n
   In *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, Vancouver, Canada, June 2023. \n
   [papers/cvpr2023.pdf [PDF]] [https://github.com/your-repo/cvpr2023 [Code]]
 
-- <b>He Kong</b>, John Smith. \n
+- He Kong, John Smith. \n
   Another Interesting Title for a Paper on Robotics. \n
   *IEEE Transactions on Robotics (T-RO)*, Vol. 39, No. 1, pp. 1-15, 2023. \n
-  [https://doi.org/10.1109/TRO.2023.54321 [DOI]] [papers/journal_2023.pdf [PDF]]
+  [https://doi.org/10.1109/TRO.2023.54321 [DOI]]
