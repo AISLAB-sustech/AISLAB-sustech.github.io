@@ -15,6 +15,11 @@
   Parameterized gain-constrained Kalman Filtering via singular value decomposition \n
   /Automatica/ \n
 
+=== 2024
+- Linya Fu, Yuanzheng He, Jiang Wang, Xu Qiao, He Kong \n
+  I-asm: Iterative acoustic scene mapping for enhanced robot auditory perception in complex indoor environments \n
+  /2024 IEEE\/RSJ International Conference on Intelligent Robots and Systems (IROS)/ \n
+
 ## To add a new publication, copy and paste the template below under the corresponding year.
 ## === Template
 ## - [Author 1], [Author 2], and [Author 3]. \n
